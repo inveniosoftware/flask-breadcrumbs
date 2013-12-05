@@ -21,23 +21,35 @@
 ## granted to it by virtue of its status as an Intergovernmental Organization
 ## or submit itself to any jurisdiction.
 
-language: python
+from setuptools import setup
 
-python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
-
-install:
-  - pip install --upgrade pip  --use-mirrors
-  - pip install coveralls --use-mirrors
-  - pip install .
-
-script:
-  - coverage run --source=flask_breadcrumbs setup.py test
-
-after_success:
-  - coveralls
-
-notifications:
-  email: false
+setup(
+    name='Flask-Breadcrumbs',
+    version='0.1',
+    url='http://github.com/inveniosoftware/flask-breadcrumbs/',
+    license='GPLv2',
+    author='Invenio collaboration',
+    author_email='info@invenio-software.org',
+    description='Flask Breadcrumbs',
+    long_description=open('README.rst').read(),
+    packages=['flask_breadcrumbs'],
+    zip_safe=False,
+    include_package_data=True,
+    platforms='any',
+    install_requires=[
+        'Flask',
+        'six',
+        'Flask-Menu'
+    ],
+    classifiers=[
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ],
+    test_suite='nose.collector',
+    tests_require=['nose', 'coverage'],
+)
