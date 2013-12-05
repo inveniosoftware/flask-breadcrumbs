@@ -18,7 +18,7 @@ Flask-Breadcrumbs is on PyPI so all you need is: ::
     pip install Flask-Breadcrumbs
 
 Documentation
-============
+=============
 Documentation is available at <http://flask-breadcrumbs.readthedocs.org> or can be build using Sphinx: ::
 
     pip install Sphinx
