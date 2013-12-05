@@ -31,6 +31,7 @@ python:
 install:
   - pip install --upgrade pip  --use-mirrors
   - pip install coveralls --use-mirrors
+  - pip install git+git://github.com/inveniosoftware/flask-menu.git
   - pip install .
 
 script:
