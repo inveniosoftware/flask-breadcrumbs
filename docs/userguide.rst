@@ -9,7 +9,7 @@ For example: ::
 
     <div>
     {%- for breadcrumb in breadcrumbs -%}
-        <a href="{{ breadcrumb.url}}">{{ breadcrumb.url}}</a>
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.text }}</a>
         {{ '/' if not loop.last }}
     {%- endfor -%}
     </div>

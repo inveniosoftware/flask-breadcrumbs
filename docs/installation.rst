@@ -5,7 +5,7 @@ Installation
 
 Install Flask-Breadcrumbs with ``pip`` ::
 
-    pip install flask-breadcrumbs
+    pip install Flask-Breadcrumbs
 
 The development version can be downloaded from `its page at GitHub
 <http://github.com/inveniosoftware/flask-breadcrumbs>`_. ::

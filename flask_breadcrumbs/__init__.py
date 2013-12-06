@@ -25,65 +25,50 @@
     flask.ext.breadcrumbs
     ---------------------
 
+    This module provides support for generating site breadcrumb navigation.
+
     Depends on `flask.ext.menu` extension.
 """
 
-from werkzeug import LocalProxy
 from flask import Blueprint, current_app, request
-from flask.ext.menu import Menu, current_menu
-
-
-def _lookup_current_function():
-    return current_app.view_functions.get(request.endpoint)
-
-
-def _lookup_current_blueprint():
-    return current_app.blueprints.get(
-        request.blueprint,
-        current_app._get_current_object())
-
-# context data
-current_function = LocalProxy(_lookup_current_function)
-current_blueprint = LocalProxy(_lookup_current_blueprint)
+from flask.ext.menu import Menu, current_menu  # pylint: disable=F0401,E0611
+from werkzeug.local import LocalProxy
 
 
 def default_breadcrumb_root(app, path):
-    """Registers the default breadcrumb path for all endpoints in this blueprint.
+    """Registers default breadcrumb path for all endpoints in this blueprint.
 
-    :param app: Flask Application or Blueprint instance.
+    :param app: The :class:`~flask.Flask` or :class:`flask.Blueprint` object.
+    :type app: :class:`flask.Flask` or :class:`flask.Blueprint`
     :param path: Path in the menu hierarchy.
         It should start with '.' to be relative to breadcrumbs root.
     """
-
     if path.startswith('.'):
         # Path relative to breadcrumb root
-        bl_path = LocalProxy(lambda:
-            (breadcrumb_root_path + path).strip('.'))
+        bl_path = LocalProxy(lambda: (
+            breadcrumb_root_path + path).strip('.'))
     else:
         bl_path = path
 
     app.__breadcrumb__ = bl_path
 
 
-
-class Breadcrumbs(Menu):
+class Breadcrumbs(Menu, object):
     """
-    Breadcrumb organizer for a Flask application.
+    Breadcrumb organizer for a :class:`~flask.Flask` application.
     """
 
     def init_app(self, app, *args, **kwargs):
-        super(self.__class__, self).init_app(app, *args, **kwargs)
+        """
+        Configures an application. This registers a `context_processor`.
+
+        :param app: The :class:`flask.Flask` object to configure.
+        :type app: :class:`flask.Flask`
+        """
+        super(Breadcrumbs, self).init_app(app, *args, **kwargs)
 
         app.config.setdefault('BREADCRUMBS_ROOT', 'breadcrumbs')
         app.context_processor(Breadcrumbs.breadcrumbs_context_processor)
-
-    # Proxy functions
-    @staticmethod
-    def breadcrumb_root_path():
-        """
-        Backend function for breadcrumb_root_path proxy.
-        """
-        return current_app.config.get('BREADCRUMBS_ROOT')
 
     @staticmethod
     def current_path():
@@ -96,13 +81,14 @@ class Breadcrumbs(Menu):
             return str(getattr(current_function, '__breadcrumb__', ''))
 
         return Breadcrumbs.get_path(
-            current_blueprint._get_current_object())
+            current_blueprint._get_current_object())  # pylint: disable=W0212
 
     @staticmethod
     def breadcrumbs():
         """
-        Returns list of breadcrumbs.
         Backend function for breadcrumbs proxy.
+
+        :return: A list of breadcrumbs.
         """
         # Construct breadcrumbs using their dynamic lists
         breadcrumb_list = []
@@ -132,53 +118,87 @@ class Breadcrumbs(Menu):
             breadcrumb_root_path + (
                 '.' + app.name if isinstance(app, Blueprint) else '')))
 
-    @staticmethod
-    def register_breadcrumb(app, path, text,
-                            endpoint_arguments_constructor=None,
-                            dynamic_list_constructor=None):
-        """Decorate endpoints that should be displayed as a breadcrumb.
 
-        :param app: Application or Blueprint which owns the function.
-        :param path: Path to this item in menu hierarchy
-            ("breadcrumbs." is automatically added).
-        :param text: Text displayed as link.
-        :param order: Index of item among other items in the same menu.
-        :param endpoint_arguments_constructor: Function returning dict of
-            arguments passed to url_for when creating the link.
-        :param dynamic_list_constructor: Function returning a list of
-            breadcrumbs to be displayed by this item. Every object should
-            have 'text' and 'url' properties/dict elements.
-        """
+def register_breadcrumb(app, path, text,
+                        endpoint_arguments_constructor=None,
+                        dynamic_list_constructor=None):
+    """
+    Decorate endpoints that should be displayed as a breadcrumb.
 
-        # Resolve blueprint-relative paths
-        if path.startswith('.'):
-            def _evaluate_path():
-                bl_path = Breadcrumbs.get_path(app)
-                return (bl_path + path).strip('.')
+    :param app: Application or Blueprint which owns the function.
+    :param path: Path to this item in menu hierarchy
+        ("breadcrumbs." is automatically added).
+    :param text: Text displayed as link.
+    :param order: Index of item among other items in the same menu.
+    :param endpoint_arguments_constructor: Function returning dict of
+        arguments passed to url_for when creating the link.
+    :param dynamic_list_constructor: Function returning a list of
+        breadcrumbs to be displayed by this item. Every object should
+        have 'text' and 'url' properties/dict elements.
+    """
 
-            func_path = LocalProxy(_evaluate_path)
+    # Resolve blueprint-relative paths
+    if path.startswith('.'):
+        def _evaluate_path():
+            """Lazy path evaluation."""
+            bl_path = Breadcrumbs.get_path(app)
+            return (bl_path + path).strip('.')
 
-        else:
-            func_path = path
+        func_path = LocalProxy(_evaluate_path)
 
-        # Get standard menu decorator
-        menu_decorator = Menu.register_menu(
-            app, func_path, text, 0,
-            endpoint_arguments_constructor=endpoint_arguments_constructor,
-            dynamic_list_constructor=dynamic_list_constructor)
+    else:
+        func_path = path
 
-        def breadcrumb_decorator(f):
-            """Applies standard menu decorator and assign breadcrumb."""
-            f.__breadcrumb__ = func_path
+    # Get standard menu decorator
+    menu_decorator = Menu.register_menu(
+        app, func_path, text, 0,
+        endpoint_arguments_constructor=endpoint_arguments_constructor,
+        dynamic_list_constructor=dynamic_list_constructor)
 
-            return menu_decorator(f)
+    def breadcrumb_decorator(func):
+        """Applies standard menu decorator and assign breadcrumb."""
+        func.__breadcrumb__ = func_path
 
-        return breadcrumb_decorator
+        return menu_decorator(func)
+
+    return breadcrumb_decorator
+
+
+def _lookup_current_function():
+    """Returns current view function for request endpoint."""
+    return current_app.view_functions.get(request.endpoint)
+
+
+def _lookup_current_blueprint():
+    """Returns current :class:`~flask.Blueprint` instance or
+    :class:`~flask.Flask` application object when no blueprint is activated
+    during request."""
+    return current_app.blueprints.get(
+        request.blueprint,
+        current_app._get_current_object())  # pylint: disable=W0212
+
+
+def _lookup_breadcrumb_root_path():
+    """
+    Backend function for breadcrumb_root_path proxy.
+    """
+    return current_app.config.get('BREADCRUMBS_ROOT')
 
 # Proxies
-breadcrumb_root_path = LocalProxy(Breadcrumbs.breadcrumb_root_path)
-current_path = LocalProxy(Breadcrumbs.current_path)
-current_breadcrumbs = LocalProxy(Breadcrumbs.breadcrumbs)
+# pylint: disable-msg=C0103
 
-# Decorators and API
-register_breadcrumb = Breadcrumbs.register_breadcrumb
+#: A proxy for the current function.
+current_function = LocalProxy(_lookup_current_function)
+
+#: A proxy for the current blueprint or application object.
+current_blueprint = LocalProxy(_lookup_current_blueprint)
+
+#: A proxy for breadcrumbs root element path.
+breadcrumb_root_path = LocalProxy(_lookup_breadcrumb_root_path)
+
+#: A proxy for detecting current breadcrumb path.
+current_path = LocalProxy(Breadcrumbs.current_path)
+
+#: A proxy for current breadcrumbs list.
+current_breadcrumbs = LocalProxy(Breadcrumbs.breadcrumbs)
+# pylint: enable-msg=C0103
