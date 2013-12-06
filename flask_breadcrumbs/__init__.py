@@ -31,7 +31,9 @@
 """
 
 from flask import Blueprint, current_app, request
-from flask.ext.menu import Menu, current_menu  # pylint: disable=F0401,E0611
+# pylint: disable=F0401,E0611
+from flask.ext.menu import Menu, register_menu, current_menu
+# pylint: enable=F0401,E0611
 from werkzeug.local import LocalProxy
 
 
@@ -150,7 +152,7 @@ def register_breadcrumb(app, path, text,
         func_path = path
 
     # Get standard menu decorator
-    menu_decorator = Menu.register_menu(
+    menu_decorator = register_menu(
         app, func_path, text, 0,
         endpoint_arguments_constructor=endpoint_arguments_constructor,
         dynamic_list_constructor=dynamic_list_constructor)
