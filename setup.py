@@ -39,7 +39,10 @@ setup(
     install_requires=[
         'Flask',
         'six',
-        'Flask-Menu'
+        'Flask-Menu>=0.1'
+    ],
+    dependency_links=[
+        'git+git://github.com/inveniosoftware/flask-menu.git#egg=Flask-Menu-0.1'
     ],
     classifiers=[
         'Environment :: Web Environment',
