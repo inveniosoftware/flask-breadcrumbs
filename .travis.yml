@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##
 ## This file is part of Flask-Breadcrumbs
-## Copyright (C) 2013 CERN.
+## Copyright (C) 2013, 2014 CERN.
 ##
 ## Flask-Breadcrumbs is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License as
@@ -31,7 +31,6 @@ python:
 install:
   - pip install --upgrade pip  --use-mirrors
   - pip install coveralls --use-mirrors
-  - pip install git+git://github.com/inveniosoftware/flask-menu.git
   - pip install .
 
 script:
