@@ -6,10 +6,10 @@ Flask-Breadcrumbs
     :target: https://travis-ci.org/inveniosoftware/flask-breadcrumbs
 .. image:: https://coveralls.io/repos/inveniosoftware/flask-breadcrumbs/badge.png?branch=master
     :target: https://coveralls.io/r/inveniosoftware/flask-breadcrumbs
-.. image:: https://pypip.in/v/flask-breadcrumbs/badge.png
-   :target: https://crate.io/packages/flask-breadcrumbs/
-.. image:: https://pypip.in/d/flask-breadcrumbs/badge.png
-   :target: https://crate.io/packages/flask-breadcrumbs/
+.. image:: https://pypip.in/v/Flask-Breadcrumbs/badge.png
+   :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
+.. image:: https://pypip.in/d/Flask-Breadcrumbs/badge.png
+   :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
 
 Installation
 ============
