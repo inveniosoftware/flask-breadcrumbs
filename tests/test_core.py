@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##
 ## This file is part of Flask-Breadcrumbs
-## Copyright (C) 2013 CERN.
+## Copyright (C) 2013, 2014 CERN.
 ##
 ## Flask-Breadcrumbs is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License as
@@ -21,21 +21,23 @@
 ## granted to it by virtue of its status as an Intergovernmental Organization
 ## or submit itself to any jurisdiction.
 
+import sys
 from unittest import TestCase
-from flask import Blueprint, Flask, request, url_for, render_template_string
+from flask import Blueprint, Flask, render_template_string
 
 from flask.ext.breadcrumbs import (Breadcrumbs,
                                    current_breadcrumbs,
                                    current_path,
-                                   current_function,
                                    default_breadcrumb_root,
                                    register_breadcrumb)
+
 
 breadcrumbs_tpl = """
 {%- for breadcrumb in breadcrumbs -%}
 {{ breadcrumb.text}},{{ breadcrumb.url}};
 {%- endfor -%}
 """
+
 
 class FlaskTestCase(TestCase):
     """
@@ -68,6 +70,11 @@ class TestBreadcrumbs(FlaskTestCase):
             |-- bar
 
         """
+
+        if sys.version_info == (3, 4, 0, 'final', 0):
+            from unittest import SkipTest
+            raise SkipTest('Python 3.4.0 detected')
+
         super(TestBreadcrumbs, self).setUp()
         self.breadcrumbs = Breadcrumbs(self.app)
 
