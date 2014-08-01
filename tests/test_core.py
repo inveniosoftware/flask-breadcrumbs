@@ -71,9 +71,10 @@ class TestBreadcrumbs(FlaskTestCase):
 
         """
 
-        if sys.version_info == (3, 4, 0, 'final', 0):
+        if sys.version_info == (3, 4, 0, 'final', 0) or \
+           sys.version_info == (3, 4, 1, 'final', 0):
             from unittest import SkipTest
-            raise SkipTest('Python 3.4.0 detected')
+            raise SkipTest('Python 3.4.[01] detected')
 
         super(TestBreadcrumbs, self).setUp()
         self.breadcrumbs = Breadcrumbs(self.app)
