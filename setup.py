@@ -25,7 +25,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Breadcrumbs',
-    version='0.1.0',
+    version='0.1.1.dev20140801',
     url='http://github.com/inveniosoftware/flask-breadcrumbs/',
     license='GPLv2',
     author='Invenio collaboration',
