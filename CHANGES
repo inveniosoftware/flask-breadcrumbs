@@ -4,6 +4,14 @@ Changelog
 Here you can see the full list of changes between each Flask-Breadcrumbs
 release.
 
-Version 0.1
------------
+Version 0.2.0 (released 2014-11-05)
+
+- The Flask-Breadcrumbs extension is now released under more
+  permissive Revised BSD License. (#11)
+- Documentation improvements. (#13)
+- Extension initialization improvements. (#12)
+- Support for Python 3.4. (#5)
+
+Version 0.1.0 (released 2014-07-24)
+
 - Initial public release
