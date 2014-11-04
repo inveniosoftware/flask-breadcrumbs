@@ -1,1 +1,0 @@
--e git+git://github.com/inveniosoftware/flask-menu.git#egg=Flask-Menu-0.1.1.dev20141029

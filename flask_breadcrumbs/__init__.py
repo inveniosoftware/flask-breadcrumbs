@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
-##
-## This file is part of Flask-Breadcrumbs
-## Copyright (C) 2013, 2014 CERN.
-##
-## Flask-Breadcrumbs is free software; you can redistribute it and/or
-## modify it under the terms of the Revised BSD License; see LICENSE
-## file for more details.
+#
+# This file is part of Flask-Breadcrumbs
+# Copyright (C) 2013, 2014 CERN.
+#
+# Flask-Breadcrumbs is free software; you can redistribute it and/or
+# modify it under the terms of the Revised BSD License; see LICENSE
+# file for more details.
 
-"""
-    flask.ext.breadcrumbs
-    ---------------------
+"""Provide support for generating site breadcrumb navigation.
 
-    This module provides support for generating site breadcrumb navigation.
-
-    Depends on `flask.ext.menu` extension.
+Depends on `flask_menu` extension.
 """
 
 from flask import Blueprint, current_app, request
@@ -22,9 +18,11 @@ from flask.ext.menu import Menu, register_menu, current_menu
 # pylint: enable=F0401,E0611
 from werkzeug.local import LocalProxy
 
+from .version import __version__
+
 
 def default_breadcrumb_root(app, path):
-    """Registers default breadcrumb path for all endpoints in this blueprint.
+    """Register default breadcrumb path for all endpoints in this blueprint.
 
     :param app: The :class:`~flask.Flask` or :class:`flask.Blueprint` object.
     :type app: :class:`flask.Flask` or :class:`flask.Blueprint`
@@ -42,9 +40,9 @@ def default_breadcrumb_root(app, path):
 
 
 class Breadcrumbs(Menu, object):
-    """
-    Breadcrumb organizer for a :class:`~flask.Flask` application.
-    """
+
+    """Breadcrumb organizer for a :class:`~flask.Flask` application."""
+
     def __init__(self, app, init_menu=False):
         """Initialize Breadcrumb extension."""
         self.init_menu = init_menu
@@ -52,8 +50,7 @@ class Breadcrumbs(Menu, object):
             self.init_app(app)
 
     def init_app(self, app, *args, **kwargs):
-        """
-        Configures an application. This registers a `context_processor`.
+        """Configure an application. This registers a `context_processor`.
 
         :param app: The :class:`flask.Flask` object to configure.
         :type app: :class:`flask.Flask`
@@ -69,12 +66,12 @@ class Breadcrumbs(Menu, object):
             if self.init_menu:
                 super(Breadcrumbs, self).init_app(app)
             else:
-                raise RuntimeError("Flask-Menu is not initialized.")
+                raise RuntimeError("Flask-Breadcrumbs is not initialized.")
 
     @staticmethod
     def current_path():
-        """
-        Determines current location in menu hierarchy.
+        """Determine current location in menu hierarchy.
+
         Backend function for current_path proxy.
         """
         # str(...) because __breadcrumb__ can hold a LocalProxy
@@ -86,8 +83,7 @@ class Breadcrumbs(Menu, object):
 
     @staticmethod
     def breadcrumbs():
-        """
-        Backend function for breadcrumbs proxy.
+        """Backend function for breadcrumbs proxy.
 
         :return: A list of breadcrumbs.
         """
@@ -102,7 +98,7 @@ class Breadcrumbs(Menu, object):
 
     @staticmethod
     def breadcrumbs_context_processor():
-        """Adds variable 'breadcrumbs' to template context.
+        """Add variable ``breadcrumbs`` to template context.
 
         It contains the list of menu entries to render as breadcrumbs.
         """
@@ -110,9 +106,7 @@ class Breadcrumbs(Menu, object):
 
     @staticmethod
     def get_path(app):
-        """
-        :return: Path to root of application's or bluerpint's branch.
-        """
+        """Return path to root of application's or bluerpint's branch."""
         return str(getattr(
             app,
             '__breadcrumb__',
@@ -123,8 +117,7 @@ class Breadcrumbs(Menu, object):
 def register_breadcrumb(app, path, text,
                         endpoint_arguments_constructor=None,
                         dynamic_list_constructor=None):
-    """
-    Decorate endpoints that should be displayed as a breadcrumb.
+    """Decorate endpoints that should be displayed as a breadcrumb.
 
     :param app: Application or Blueprint which owns the function.
     :param path: Path to this item in menu hierarchy
@@ -137,7 +130,6 @@ def register_breadcrumb(app, path, text,
         breadcrumbs to be displayed by this item. Every object should
         have 'text' and 'url' properties/dict elements.
     """
-
     # Resolve blueprint-relative paths
     if path.startswith('.'):
         def _evaluate_path():
@@ -157,7 +149,7 @@ def register_breadcrumb(app, path, text,
         dynamic_list_constructor=dynamic_list_constructor)
 
     def breadcrumb_decorator(func):
-        """Applies standard menu decorator and assign breadcrumb."""
+        """Applie standard menu decorator and assign breadcrumb."""
         func.__breadcrumb__ = func_path
 
         return menu_decorator(func)
@@ -166,23 +158,23 @@ def register_breadcrumb(app, path, text,
 
 
 def _lookup_current_function():
-    """Returns current view function for request endpoint."""
+    """Return current view function for request endpoint."""
     return current_app.view_functions.get(request.endpoint)
 
 
 def _lookup_current_blueprint():
-    """Returns current :class:`~flask.Blueprint` instance or
-    :class:`~flask.Flask` application object when no blueprint is activated
-    during request."""
+    """Return current :class:`~flask.Blueprint` instance.
+
+    Alternatively return :class:`~flask.Flask` application object when no
+    blueprint is activated during request.
+    """
     return current_app.blueprints.get(
         request.blueprint,
         current_app._get_current_object())  # pylint: disable=W0212
 
 
 def _lookup_breadcrumb_root_path():
-    """
-    Backend function for breadcrumb_root_path proxy.
-    """
+    """Backend function for breadcrumb_root_path proxy."""
     return current_app.config.get('BREADCRUMBS_ROOT')
 
 # Proxies
