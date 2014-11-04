@@ -26,7 +26,7 @@ setup(
     install_requires=[
         'Flask',
         'six',
-        'Flask-Menu>=0.1'
+        'Flask-Menu>=0.1.1.dev20141029'
     ],
     classifiers=[
         'Environment :: Web Environment',

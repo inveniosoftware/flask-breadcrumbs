@@ -63,7 +63,7 @@ class TestBreadcrumbs(FlaskTestCase):
             raise SkipTest('Python 3.4.[01] detected')
 
         super(TestBreadcrumbs, self).setUp()
-        self.breadcrumbs = Breadcrumbs(self.app)
+        self.breadcrumbs = Breadcrumbs(self.app, init_menu=True)
 
         @self.app.route('/test')
         @register_breadcrumb(self.app, '.', 'Test')
@@ -114,7 +114,7 @@ class TestBreadcrumbs(FlaskTestCase):
         del self.breadcrumbs
 
     def test_simple_app(self):
-        Breadcrumbs(self.app)
+        Breadcrumbs(self.app, init_menu=True)
         with self.app.test_client() as c:
             c.get('/test')
             self.assertEqual(current_path, 'breadcrumbs')
@@ -180,3 +180,22 @@ class TestBreadcrumbs(FlaskTestCase):
             response = c.get('/foo/baz')
             self.assertEqual(response.data.decode('utf8'),
                              'Test,/test;Baz,/foo/baz;')
+
+
+class MenuIntegrationTestCase(FlaskTestCase):
+
+    def test_without_menu(self):
+        # it must raise an exception because is not registered.
+        self.assertRaises(RuntimeError, Breadcrumbs, self.app)
+
+    def test_init_menu(self):
+        Breadcrumbs(self.app, init_menu=True)
+        assert 'menu' in self.app.extensions
+
+    def test_create_menu_first(self):
+        from flask_menu import Menu
+        menu = Menu(self.app)
+        entry = self.app.extensions['menu']
+        # it must reuse existing menu extension.
+        Breadcrumbs(self.app)
+        assert entry == self.app.extensions['menu']

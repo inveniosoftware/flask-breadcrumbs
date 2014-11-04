@@ -45,6 +45,11 @@ class Breadcrumbs(Menu, object):
     """
     Breadcrumb organizer for a :class:`~flask.Flask` application.
     """
+    def __init__(self, app, init_menu=False):
+        """Initialize Breadcrumb extension."""
+        self.init_menu = init_menu
+        if app is not None:
+            self.init_app(app)
 
     def init_app(self, app, *args, **kwargs):
         """
@@ -53,10 +58,18 @@ class Breadcrumbs(Menu, object):
         :param app: The :class:`flask.Flask` object to configure.
         :type app: :class:`flask.Flask`
         """
-        super(Breadcrumbs, self).init_app(app, *args, **kwargs)
-
         app.config.setdefault('BREADCRUMBS_ROOT', 'breadcrumbs')
         app.context_processor(Breadcrumbs.breadcrumbs_context_processor)
+
+        self.app = app
+        # Follow the Flask guidelines on usage of app.extensions
+        if not hasattr(app, 'extensions'):
+            app.extensions = {}
+        if 'menu' not in app.extensions:
+            if self.init_menu:
+                super(Breadcrumbs, self).init_app(app)
+            else:
+                raise RuntimeError("Flask-Menu is not initialized.")
 
     @staticmethod
     def current_path():

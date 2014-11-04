@@ -18,6 +18,7 @@ python:
 install:
   - pip install --upgrade pip  --use-mirrors
   - pip install coveralls --use-mirrors
+  - pip install -r requirements.txt
   - pip install .
 
 script:
