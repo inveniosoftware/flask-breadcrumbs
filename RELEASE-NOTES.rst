@@ -1,8 +1,8 @@
 ======================================
- Flask-Breadcrumbs v0.1.0 is released
+ Flask-Breadcrumbs v0.2.0 is released
 ======================================
 
-Flask-Breadcrumbs v0.1.0 was released on June 27, 2014.
+Flask-Breadcrumbs v0.2.0 was released on November 5, 2014.
 
 About
 -----
@@ -13,7 +13,11 @@ generating site breadcrumb navigation.
 What's new
 ----------
 
-- Initial public release.
+- The Flask-Breadcrumbs extension is now released under more
+  permissive Revised BSD License. (#11)
+- Documentation improvements. (#13)
+- Extension initialization improvements. (#12)
+- Support for Python 3.4. (#5)
 
 Installation
 ------------
@@ -23,7 +27,7 @@ Installation
 Documentation
 -------------
 
-   http://flask-breadcrumbs.readthedocs.org/en/v0.1.0
+   http://flask-breadcrumbs.readthedocs.org/en/v0.2.0
 
 Homepage
 --------
