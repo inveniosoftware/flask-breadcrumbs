@@ -114,7 +114,7 @@ class Breadcrumbs(Menu, object):
                 '.' + app.name if isinstance(app, Blueprint) else '')))
 
 
-def register_breadcrumb(app, path, text,
+def register_breadcrumb(app, path, text, order=0,
                         endpoint_arguments_constructor=None,
                         dynamic_list_constructor=None):
     """Decorate endpoints that should be displayed as a breadcrumb.
@@ -144,7 +144,7 @@ def register_breadcrumb(app, path, text,
 
     # Get standard menu decorator
     menu_decorator = register_menu(
-        app, func_path, text, 0,
+        app, func_path, text, order,
         endpoint_arguments_constructor=endpoint_arguments_constructor,
         dynamic_list_constructor=dynamic_list_constructor)
 
