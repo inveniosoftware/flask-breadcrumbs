@@ -120,6 +120,31 @@ For example:
     {%- endfor -%}
     </div>
 
+.. _variables:
+
+Variable rules
+^^^^^^^^^^^^^^
+
+For routes with a variable part, a dynamic list constructor can be used to
+create a more meaningful breadcrumb. In the example below, the User's primary
+key is used to create a breadcrumb displaying their name.
+
+.. code-block:: python
+
+    from flask import request, render_template
+
+    def view_user_dlc(*args, **kwargs):
+        user_id = request.view_args['user_id']
+        user = User.query.get(user_id)
+        return [{'text': user.name, 'url': user.url}]
+
+    @app.route('/users/<int:user_id>')
+    @breadcrumbs.register_breadcrumb(app, '.user.id', '',
+                                     dynamic_list_constructor=view_user_dlc)
+    def view_user(user_id):
+        user = User.query.get(user_id)
+        return render_template('user.html', user=user)
+
 .. _blueprints:
 
 Blueprint Support
