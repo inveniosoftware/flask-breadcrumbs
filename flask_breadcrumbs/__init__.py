@@ -43,8 +43,14 @@ class Breadcrumbs(Menu, object):
 
     """Breadcrumb organizer for a :class:`~flask.Flask` application."""
 
-    def __init__(self, app, init_menu=False):
-        """Initialize Breadcrumb extension."""
+    def __init__(self, app=None, init_menu=True):
+        """Initialize Breadcrumb extension.
+
+        :param app: The :class:`flask.Flask` object to configure.
+        :type app: :class:`flask.Flask`
+        :param init_menu: If Flask-Menu should be initialized.
+        :type init_menu: bool
+        """
         self.init_menu = init_menu
         if app is not None:
             self.init_app(app)

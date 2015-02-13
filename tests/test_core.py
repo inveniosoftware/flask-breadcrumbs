@@ -185,11 +185,11 @@ class TestBreadcrumbs(FlaskTestCase):
 class MenuIntegrationTestCase(FlaskTestCase):
 
     def test_without_menu(self):
-        # it must raise an exception because is not registered.
-        self.assertRaises(RuntimeError, Breadcrumbs, self.app)
+        # it must raise an exception because it is not registered.
+        self.assertRaises(RuntimeError, Breadcrumbs, self.app, False)
 
     def test_init_menu(self):
-        Breadcrumbs(self.app, init_menu=True)
+        Breadcrumbs(self.app)
         assert 'menu' in self.app.extensions
 
     def test_create_menu_first(self):
@@ -197,5 +197,5 @@ class MenuIntegrationTestCase(FlaskTestCase):
         menu = Menu(self.app)
         entry = self.app.extensions['menu']
         # it must reuse existing menu extension.
-        Breadcrumbs(self.app)
+        Breadcrumbs(self.app, init_menu=False)
         assert entry == self.app.extensions['menu']
