@@ -150,7 +150,7 @@ key is used to create a breadcrumb displaying their name.
 Blueprint Support
 ^^^^^^^^^^^^^^^^^
 
-The most import part of an modular Flask application is Blueprint. You
+The most import part of a modular Flask application is Blueprint. You
 can create one for your application somewhere in your code and decorate
 your view function, like this:
 
@@ -166,13 +166,12 @@ your view function, like this:
     def index():
         pass
 
+Combining Multiple Blueprints
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default breadcrumb root
-=======================
-
-Sometimes you want to combine multiple blueprints and organize the
-navigation to certain hierarchy using function
-:func:`~flask.ext.breadcrumbs.default_breadcrumb_root`.
+Sometimes you want to combine multiple blueprints and organise the
+navigation to certain hierarchy.  This can be achieved by using the
+function :func:`~flask.ext.breadcrumbs.default_breadcrumb_root`.
 
 .. code-block:: python
 
