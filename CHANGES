@@ -4,6 +4,13 @@ Changelog
 Here you can see the full list of changes between each Flask-Breadcrumbs
 release.
 
+Version 0.3.0 (released 2015-03-16)
+
+- Improved factory pattern support.  (#19)
+- Added example of using a dynamic list constructor with variables.
+  (#16 #17)
+- Allows usage of ordered breadcrumbs as menu.  (#15)
+
 Version 0.2.0 (released 2014-11-05)
 
 - The Flask-Breadcrumbs extension is now released under more
