@@ -203,6 +203,66 @@ with 3 items during processing request for `/social/list`.
                    list(breadcrumbs.current_breadcrumbs)) == [
                       '/', '/account/', '/social/list']
 
+Advanced Examples
+=================
+
+Use with MethodViews and Blueprints
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+No routes are used in this example. Take note of the odd syntax for explicitly
+calling the decorator.
+
+.. code-block:: python
+
+    from flask import Flask, render_template, Blueprint
+    from flask.ext import breadcrumbs
+    from flask.views import MethodView
+
+    app = Flask(__name__)
+    breadcrumbs.Breadcrumbs(app=app)
+    bp = Blueprint('bp', __name__,)
+
+
+    class LevelOneView(MethodView):
+        def get(self):
+            return render_template("template.html")
+
+
+    class LevelTwoView(MethodView):
+        def get(self):
+            return render_template("template.html")
+
+    # Define the view by calling the decorator on its own,
+    # followed by the view inside parenthesis
+    level_one_view = breadcrumbs.register_breadcrumb(bp, 'breadcrumbs.', 'Level One')(LevelOneView.as_view('first'))
+    bp.add_url_rule("/one", view_func=level_one_view)  # Add the rule to the blueprint
+
+    level_two_view = breadcrumbs.register_breadcrumb(bp, 'breadcrumbs.two', 'Level Two')(LevelOneView.as_view('second'))
+    bp.add_url_rule("/two", view_func=level_two_view)
+
+    app.register_blueprint(bp)
+
+
+    if __name__ == '__main__':
+        app.run(debug=True)
+
+
+.. code-block:: jinja
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Example</h1>
+        <div>
+            {%- for breadcrumb in breadcrumbs -%}
+                <a href="{{ breadcrumb.url }}">{{ breadcrumb.text }}</a>
+                {{ '/' if not loop.last }}
+            {%- endfor -%}
+        </div>
+    </body>
+    </html>
 
 .. _api:
 
