@@ -31,6 +31,13 @@ Documentation is readable at http://flask-breadcrumbs.readthedocs.org or can be 
     pip install Sphinx
     python setup.py build_sphinx
 
+Example Page
+============
+To view an example of breadcrumbs in action, see `examples/examples_app.py`: ::
+
+    cd examples
+    python examples_app.py
+
 Testing
 =======
 Running the test suite is as simple as: ::
