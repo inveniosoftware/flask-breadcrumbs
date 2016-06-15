@@ -13,3 +13,4 @@ Contact us at `info@inveniosoftware.org <mailto:info@inveniosoftware.org>`_
 * Joshua Arnott <josh@snorfalorpagus.net>
 * Florian Merges <fmerges@fstarter.org>
 * Nicholas Rutherford <zgithub@isomorphism.ca>
+* Tianhui Michael Li <>

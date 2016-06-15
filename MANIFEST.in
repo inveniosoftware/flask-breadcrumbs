@@ -12,4 +12,5 @@ include LICENSE *.rst *.txt
 include docs/*.rst docs/*.py docs/Makefile
 recursive-include docs/_templates *.html
 recursive-include docs/_themes *.py *.css *.css_t *.conf *.html LICENSE README
+recursive-include examples *.py
 recursive-include tests *.py
