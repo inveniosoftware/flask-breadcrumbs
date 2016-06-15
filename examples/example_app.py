@@ -29,15 +29,29 @@ def topic1():
     """
     return render_template_string(breadcrumbs_tpl)
 
-@app.route('/topic1/topic2.html')
-@breadcrumbs.register_breadcrumb(app, '.topic1.topic2', 'Home')
+@app.route('/topic2.html')
+@breadcrumbs.register_breadcrumb(app, '.topic2', 'Home')
 def topic2():
+    """
+    Home,/;
+    Home,/topic2.html;
+    """
+    return render_template_string(breadcrumbs_tpl)
+
+@app.route('/topic1/topic3.html')
+@breadcrumbs.register_breadcrumb(app, '.topic1.topic3', 'Home')
+@breadcrumbs.register_breadcrumb(app, '.topic2.topic3', 'Home')
+def topic3():
     """
     Home, /;
     Home, /topic1.html;
     Home, /topic1/topic2.html;
     """
     return render_template_string(breadcrumbs_tpl)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
