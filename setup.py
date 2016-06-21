@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-Breadcrumbs
-# Copyright (C) 2013, 2014 CERN.
+# Copyright (C) 2013, 2014, 2016 CERN.
 #
 # Flask-Breadcrumbs is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -51,7 +51,8 @@ tests_require = [
     'pytest-cache>=1.0',
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
-    'pytest>=2.6.1',
+    'pytest>=2.8.0',
+    'pep257>=0.7.0',
     'coverage'
 ]
 
@@ -76,6 +77,7 @@ setup(
     ],
     extras_require={
         'docs': ['sphinx'],
+        'tests': tests_require,
     },
     tests_require=tests_require,
     cmdclass={'test': PyTest},

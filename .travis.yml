@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-Breadcrumbs
-# Copyright (C) 2013, 2014 CERN.
+# Copyright (C) 2013, 2014, 2016 CERN.
 #
 # Flask-Breadcrumbs is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -16,15 +16,13 @@ python:
   - "3.4"
 
 install:
-  - pip install --upgrade pip  --use-mirrors
-  - pip install coveralls pep257 --use-mirrors
-  - pip install pytest pytest-pep8 pytest-cov pytest-cache --use-mirrors
+  - pip install --upgrade pip
+  - pip install coveralls pep257
+  - pip install pytest pytest-pep8 pytest-cov pytest-cache
   - pip install -e .[docs]
 
 script:
-  - pep257 flask_breadcrumbs
-  - "sphinx-build -qnNW docs docs/_build/html"
-  - python setup.py test
+  - "./run-tests.sh"
 
 after_success:
   - coveralls

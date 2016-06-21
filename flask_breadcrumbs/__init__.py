@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-Breadcrumbs
-# Copyright (C) 2013, 2014, 2015 CERN.
+# Copyright (C) 2013, 2014, 2015, 2016 CERN.
 #
 # Flask-Breadcrumbs is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -40,7 +40,6 @@ def default_breadcrumb_root(app, path):
 
 
 class Breadcrumbs(Menu, object):
-
     """Breadcrumb organizer for a :class:`~flask.Flask` application."""
 
     def __init__(self, app=None, init_menu=True):
