@@ -52,7 +52,7 @@ tests_require = [
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
     'pytest>=2.8.0',
-    'pep257>=0.7.0',
+    'pydocstyle>=1.0.0',
     'coverage'
 ]
 
