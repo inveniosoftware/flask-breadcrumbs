@@ -14,7 +14,7 @@ Depends on `flask_menu` extension.
 
 from flask import Blueprint, current_app, request
 # pylint: disable=F0401,E0611
-from flask.ext.menu import Menu, register_menu, current_menu
+from flask_menu import Menu, register_menu, current_menu
 # pylint: enable=F0401,E0611
 from werkzeug.local import LocalProxy
 

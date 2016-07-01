@@ -79,15 +79,15 @@ Here is a simple Flask-Breadcrumbs usage example:
 .. code-block:: python
 
     from flask import Flask
-    from flask.ext import breadcrumbs
+    from flask_breadcrumbs import Breadcrumbs, register_breadcrumbs
 
     app = Flask(__name__)
 
     # Initialize Flask-Breadcrumbs
-    breadcrumbs.Breadcrumbs(app=app)
+    Breadcrumbs(app=app)
 
     @app.route('/')
-    @breadcrumbs.register_breadcrumb(app, '.', 'Home')
+    @register_breadcrumb(app, '.', 'Home')
     def index():
         pass
 
@@ -157,12 +157,12 @@ your view function, like this:
 .. code-block:: python
 
     from flask import Blueprint
-    from flask.ext import breadcrumbs
+    from flask_breadcrumbs import register_breadcrumbs
 
     account = Blueprint('account', __name__, url_prefix='/account')
 
     @account.route('/')
-    @breadcrumbs.register_breadcrumb(account, '.', 'Your account')
+    @register_breadcrumb(account, '.', 'Your account')
     def index():
         pass
 
@@ -171,18 +171,18 @@ Combining Multiple Blueprints
 
 Sometimes you want to combine multiple blueprints and organise the
 navigation to certain hierarchy.  This can be achieved by using the
-function :func:`~flask.ext.breadcrumbs.default_breadcrumb_root`.
+function :func:`~flask_breadcrumbs.default_breadcrumb_root`.
 
 .. code-block:: python
 
     from flask import Blueprint
-    from flask.ext import breadcrumbs
+    from flask_breadcrumbs import default_breadcrumb_root, register_breadcrumbs
 
     social = Blueprint('social', __name__, url_prefix='/social')
-    breadcrumbs.default_breadcrumb_root(social, '.account')
+    default_breadcrumb_root(social, '.account')
 
     @social.route('/list')
-    @breadcrumbs.register_breadcrumb(social, '.list', 'Social networks')
+    @register_breadcrumb(social, '.list', 'Social networks')
     def list():
         pass
 
@@ -192,7 +192,7 @@ with 3 items during processing request for `/social/list`.
 .. code-block:: python
 
     from example import app
-    from flask.ext import breadcrumbs
+    from flask_breadcrumbs import current_breadcrumbs
     import account
     import social
     app.register_blueprint(account.bp_account)
@@ -200,7 +200,7 @@ with 3 items during processing request for `/social/list`.
     with app.test_client() as c:
         c.get('/social/list')
         assert map(lambda x: x.url,
-                   list(breadcrumbs.current_breadcrumbs)) == [
+                   list(current_breadcrumbs)) == [
                       '/', '/account/', '/social/list']
 
 Advanced Examples
@@ -214,36 +214,36 @@ calling the decorator.
 .. code-block:: python
 
     from flask import Flask, render_template, Blueprint
-    from flask.ext import breadcrumbs
+    from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
     from flask.views import MethodView
 
     app = Flask(__name__)
-    breadcrumbs.Breadcrumbs(app=app)
+    Breadcrumbs(app=app)
     bp = Blueprint('bp', __name__,)
 
 
     class LevelOneView(MethodView):
         def get(self):
-            return render_template("template.html")
+            return render_template('template.html')
 
 
     class LevelTwoView(MethodView):
         def get(self):
-            return render_template("template.html")
+            return render_template('template.html')
 
     # Define the view by calling the decorator on its own,
     # followed by the view inside parenthesis
-    level_one_view = breadcrumbs.register_breadcrumb(bp, 'breadcrumbs.', 'Level One')(LevelOneView.as_view('first'))
-    bp.add_url_rule("/one", view_func=level_one_view)  # Add the rule to the blueprint
+    level_one_view = register_breadcrumb(bp, 'breadcrumbs.', 'Level One')(
+        LevelOneView.as_view('first')
+    )
+    bp.add_url_rule('/one', view_func=level_one_view)  # Add the rule to the blueprint
 
-    level_two_view = breadcrumbs.register_breadcrumb(bp, 'breadcrumbs.two', 'Level Two')(LevelOneView.as_view('second'))
-    bp.add_url_rule("/two", view_func=level_two_view)
+    level_two_view = breadcrumbs.register_breadcrumb(bp, 'breadcrumbs.two', 'Level Two')(
+        LevelOneView.as_view('second')
+    )
+    bp.add_url_rule('/two', view_func=level_two_view)
 
     app.register_blueprint(bp)
-
-
-    if __name__ == '__main__':
-        app.run(debug=True)
 
 
 .. code-block:: jinja
@@ -275,7 +275,7 @@ method, this part of the documentation is for you.
 Flask extension
 ^^^^^^^^^^^^^^^
 
-.. module:: flask.ext.breadcrumbs
+.. module:: flask_breadcrumbs
 
 .. autoclass:: Breadcrumbs
    :members:
