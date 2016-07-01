@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-Breadcrumbs
 release.
 
+Version 0.4.0 (released 2016-07-01)
+
+- Removes support for Python 2.6.
+- Adds an advanced example using MethodViews and Blueprints. (#23)
+- Amends deprecated import of Flask extensions via `flask.ext`. (#29)
+
 Version 0.3.0 (released 2015-03-16)
 
 - Improved factory pattern support.  (#19)

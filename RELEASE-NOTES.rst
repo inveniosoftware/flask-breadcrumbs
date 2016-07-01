@@ -1,8 +1,8 @@
-======================================
- Flask-Breadcrumbs v0.3.0 is released
-======================================
+==========================
+ Flask-Breadcrumbs v0.4.0
+==========================
 
-Flask-Breadcrumbs v0.3.0 was released on March 16, 2015.
+Flask-Breadcrumbs v0.4.0 was released on July 1, 2016.
 
 About
 -----
@@ -10,23 +10,30 @@ About
 Flask-Breadcrumbs is a Flask extension that adds support for
 generating site breadcrumb navigation.
 
-What's new
-----------
+Incompatible changes
+--------------------
 
-- Improved factory pattern support.  (#19)
-- Added example of using a dynamic list constructor with variables.
-  (#16 #17)
-- Allows usage of ordered breadcrumbs as menu.  (#15)
+- Removes support for Python 2.6.
+
+Improved features
+-----------------
+
+- Adds an advanced example using MethodViews and Blueprints. (#23)
+
+Bug fixes
+---------
+
+- Amends deprecated import of Flask extensions via `flask.ext`. (#29)
 
 Installation
 ------------
 
-   $ pip install Flask-Breadcrumbs
+   $ pip install flask-breadcrumbs==0.4.0
 
 Documentation
 -------------
 
-   http://flask-breadcrumbs.readthedocs.org/en/v0.3.0
+   http://flask-breadcrumbs.readthedocs.org/en/v0.4.0
 
 Homepage
 --------

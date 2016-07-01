@@ -49,9 +49,9 @@ deploy:
   provider: pypi
   user: jirikuncar
   password:
-    secure: O5BAgL7uQLyhVGk5/MLVUdDTBtaNexJNWNTXUioW97b6Sl8KdD2s+uJmVIluJ1CtO0r/uvogLNEyrDKPHBNTw8diPN+yXLhCpZe0aiM1AKYmIGDulicQcTNLG176A3QkYc1DW9HMN2d6Tm4bi3kieACtqByACgDPpso8engTvqBmHsl9f8VvEFdoT3O6/yPCi7P7IgWewr2/0l18Y/kmkQPiPYXmBF8hshuP812aV1h0MohxRoYl+rvIlGBFd5F06UZg/1mjxDCZgwxWEzutpZNW3doDZ4cPnJebv4SPuwY8+pTsJ8icIkoPofvkolhcudWLnfaPaR0dVIyHF1OkuNffLFMLKV8VxtHmmThACeRqUpi9Fs4u2ru7q84yDXPnM6cl9koNjAQRsT/caTzL/wNGJ/0SlcuoMEuwDBZWdOAxFf66l/ZyxjQTHLonybUPHKac1lsiV3IcVrJn4Ke4WttmXqGYcV1Rj6sdT7nFVUC0DvWiE+JkBc62XfLSkTWB1Q3rx1Tm7UACwYn6762N3r843EYEM3M4pwgy5IIwIz7XhmCD2W2ZFWXzlvBqBBdpy+w4+uxWk4LbvunNIOXrJtswMnjo93ZIQ2hqdbq3M12B6z74k6h4NjQ7CxhasGdSTCFR6B/5FejFUhH+0tTsUMXUaux7tKg4OaCbP3ZV7Qk=
-  distributions: "sdist bdist_wheel"
+    secure: Xt9EigqRTy4q7pw1iP58a9k+YTC8WSaeSUJhsfCLvjKYvi5/eAQ/CJneQGliQm4yRIv69WwPsh7IuktmmcQpIdhkDZHN8BTa09B+C5aqx7LhulQGNQoX4oZ7sK0YPg/IRT0bFGLMbP6Hkri5Hr7e7zVFJg2Rkx9zWEtSC5qWTvM=
+  distributions: sdist bdist_wheel
   on:
     tags: true
-    python: "2.7"
-    condition: $REQUIREMENTS = release
+    python: '2.7'
+    condition: "$REQUIREMENTS = release"
