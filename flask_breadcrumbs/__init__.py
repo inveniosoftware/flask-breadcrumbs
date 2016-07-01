@@ -65,13 +65,13 @@ class Breadcrumbs(Menu, object):
 
         self.app = app
         # Follow the Flask guidelines on usage of app.extensions
-        if not hasattr(app, 'extensions'):
+        if not hasattr(app, 'extensions'):  # pragma: no cover
             app.extensions = {}
         if 'menu' not in app.extensions:
             if self.init_menu:
                 super(Breadcrumbs, self).init_app(app)
             else:
-                raise RuntimeError("Flask-Breadcrumbs is not initialized.")
+                raise RuntimeError('Flask-Breadcrumbs is not initialized.')
 
     @staticmethod
     def current_path():
@@ -126,7 +126,7 @@ def register_breadcrumb(app, path, text, order=0,
 
     :param app: Application or Blueprint which owns the function.
     :param path: Path to this item in menu hierarchy
-        ("breadcrumbs." is automatically added).
+        ('breadcrumbs.' is automatically added).
     :param text: Text displayed as link.
     :param order: Index of item among other items in the same menu.
     :param endpoint_arguments_constructor: Function returning dict of

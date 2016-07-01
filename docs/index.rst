@@ -299,7 +299,7 @@ Proxies
    Name of breadcrumbs root path.
 
 
-.. include:: ../CHANGES
+.. include:: ../CHANGES.rst
 
 .. include:: ../CONTRIBUTING.rst
 
@@ -308,4 +308,4 @@ License
 
 .. include:: ../LICENSE
 
-.. include:: ../AUTHORS
+.. include:: ../AUTHORS.rst

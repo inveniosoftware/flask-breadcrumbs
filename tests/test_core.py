@@ -11,6 +11,7 @@ import sys
 from unittest import TestCase
 
 from flask import Blueprint, Flask, render_template_string
+
 from flask_breadcrumbs import (Breadcrumbs, current_breadcrumbs, current_path,
                                default_breadcrumb_root, register_breadcrumb)
 
