@@ -36,7 +36,7 @@ Example Page
 To view an example of breadcrumbs in action, see `examples/examples_app.py`: ::
 
     cd examples
-    python examples_app.py
+    FLASK_APP=examples/app.py flask run
 
 Testing
 =======
