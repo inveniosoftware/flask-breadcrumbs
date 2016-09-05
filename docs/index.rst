@@ -79,7 +79,7 @@ Here is a simple Flask-Breadcrumbs usage example:
 .. code-block:: python
 
     from flask import Flask
-    from flask_breadcrumbs import Breadcrumbs, register_breadcrumbs
+    from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
 
     app = Flask(__name__)
 
@@ -157,7 +157,7 @@ your view function, like this:
 .. code-block:: python
 
     from flask import Blueprint
-    from flask_breadcrumbs import register_breadcrumbs
+    from flask_breadcrumbs import register_breadcrumb
 
     account = Blueprint('account', __name__, url_prefix='/account')
 
@@ -176,7 +176,7 @@ function :func:`~flask_breadcrumbs.default_breadcrumb_root`.
 .. code-block:: python
 
     from flask import Blueprint
-    from flask_breadcrumbs import default_breadcrumb_root, register_breadcrumbs
+    from flask_breadcrumbs import default_breadcrumb_root, register_breadcrumb
 
     social = Blueprint('social', __name__, url_prefix='/social')
     default_breadcrumb_root(social, '.account')
