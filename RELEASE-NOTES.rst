@@ -33,7 +33,7 @@ Installation
 Documentation
 -------------
 
-   http://flask-breadcrumbs.readthedocs.org/en/v0.4.0
+   https://flask-breadcrumbs.readthedocs.io/en/v0.4.0
 
 Homepage
 --------
@@ -45,6 +45,6 @@ Good luck and thanks for choosing Flask-Breadcrumbs.
 | Invenio Development Team
 |   Email: info@inveniosoftware.org
 |   IRC: #invenio on irc.freenode.net
-|   Twitter: http://twitter.com/inveniosoftware
-|   GitHub: http://github.com/inveniosoftware
+|   Twitter: https://twitter.com/inveniosoftware
+|   GitHub: https://github.com/inveniosoftware
 |   URL: http://inveniosoftware.org

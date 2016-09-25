@@ -24,7 +24,8 @@ Flask-Breadcrumbs is on PyPI so all you need is: ::
 
 Documentation
 =============
-Documentation is readable at http://flask-breadcrumbs.readthedocs.org or can be build using Sphinx: ::
+Documentation is readable at http://flask-breadcrumbs.readthedocs.io/ or
+can be build using Sphinx: ::
 
     git submodule init
     git submodule update
