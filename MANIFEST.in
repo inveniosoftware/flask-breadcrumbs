@@ -8,6 +8,7 @@
 # file for more details.
 
 include .checkignore .coveragerc run-tests.sh pytest.ini tox.ini
+include .lgtm MAINTAINERS
 include LICENSE *.rst *.txt
 include docs/*.rst docs/*.py docs/Makefile docs/requirements.txt
 recursive-include docs/_templates *.html
