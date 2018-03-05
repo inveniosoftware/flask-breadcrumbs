@@ -6,9 +6,9 @@
     :target: https://travis-ci.org/inveniosoftware/flask-breadcrumbs
 .. image:: https://coveralls.io/repos/inveniosoftware/flask-breadcrumbs/badge.png?branch=master
     :target: https://coveralls.io/r/inveniosoftware/flask-breadcrumbs
-.. image:: https://pypip.in/v/Flask-Breadcrumbs/badge.png
+.. image:: https://img.shields.io/pypi/v/Flask-Breadcrumbs.svg
    :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
-.. image:: https://pypip.in/d/Flask-Breadcrumbs/badge.png
+.. image:: https://img.shields.io/pypi/dm/Flask-Breadcrumbs.svg
    :target: https://pypi.python.org/pypi/Flask-Breadcrumbs/
 
 About
