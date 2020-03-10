@@ -19,18 +19,18 @@ history = open('CHANGES.rst').read()
 tests_require = [
     'check-manifest>=0.25',
     'coverage>=4.0',
-    'isort>=4.2.2',
+    'isort>=4.3.11',
     'mock>=1.0.0',
     'pydocstyle>=1.0.0',
     'pytest-cache>=1.0',
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
-    'pytest>=2.8.0',
+    'pytest>=3.8.0',
 ]
 
 extras_require = {
     'docs': [
-        'Sphinx>=1.4.2',
+        'Sphinx>=1.5.1',
     ],
     'tests': tests_require,
 }
@@ -40,12 +40,12 @@ for name, reqs in extras_require.items():
     extras_require['all'].extend(reqs)
 
 setup_requires = [
-    'pytest-runner>=2.6.2',
+    'pytest-runner>=3.0.0',
 ]
 
 install_requires = [
-    'Flask>=0.10.0',
-    'six>=1.10.0',
+    'Flask>=1.0.4',
+    'six>=1.12.0',
     'Flask-Menu>=0.2'
 ]
 

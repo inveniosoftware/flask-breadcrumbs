@@ -10,8 +10,6 @@
 notifications:
   email: false
 
-sudo: false
-
 language: python
 
 cache:
@@ -23,10 +21,9 @@ env:
   - REQUIREMENTS=devel
 
 python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
   - "3.5"
+  - "3.6"
+  - "3.7"
 
 before_install:
   - "travis_retry pip install --upgrade pip setuptools py"
@@ -53,5 +50,5 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     tags: true
-    python: '2.7'
+    python: '3.6'
     condition: "$REQUIREMENTS = release"

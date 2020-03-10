@@ -14,7 +14,7 @@ Depends on `flask_menu` extension.
 
 from flask import Blueprint, current_app, request
 # pylint: disable=F0401,E0611
-from flask_menu import Menu, register_menu, current_menu
+from flask_menu import Menu, current_menu, register_menu
 # pylint: enable=F0401,E0611
 from werkzeug.local import LocalProxy
 
@@ -154,7 +154,7 @@ def register_breadcrumb(app, path, text, order=0,
         dynamic_list_constructor=dynamic_list_constructor)
 
     def breadcrumb_decorator(func):
-        """Applie standard menu decorator and assign breadcrumb."""
+        """Apply standard menu decorator and assign breadcrumb."""
         func.__breadcrumb__ = func_path
 
         return menu_decorator(func)
