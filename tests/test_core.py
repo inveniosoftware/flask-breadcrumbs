@@ -15,7 +15,6 @@ from flask import Blueprint, Flask, render_template_string
 from flask_breadcrumbs import (Breadcrumbs, current_breadcrumbs, current_path,
                                default_breadcrumb_root, register_breadcrumb)
 
-
 breadcrumbs_tpl = """
 {%- for breadcrumb in breadcrumbs -%}
 {{ breadcrumb.text}},{{ breadcrumb.url}};

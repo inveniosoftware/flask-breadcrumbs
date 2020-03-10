@@ -311,7 +311,7 @@ texinfo_documents = [
 
 # See <http://sphinx-doc.org/ext/intersphinx.html>
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/2.7/', None),
-    'werkzeug': ('http://werkzeug.pocoo.org/docs/', None),
-    'flask': ('http://flask.pocoo.org/docs/', None),
+    'python': ('https://docs.python.org/3/', None),
+    'werkzeug': ('https://werkzeug.palletsprojects.com/en/1.0.x/', None),
+    'flask': ('https://flask.palletsprojects.com/en/1.1.x/', None),
 }
