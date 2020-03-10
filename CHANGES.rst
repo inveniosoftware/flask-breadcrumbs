@@ -4,6 +4,11 @@ Changelog
 Here you can see the full list of changes between each Flask-Breadcrumbs
 release.
 
+Version 0.5.0 (released 2020-03-10)
+
+- Removes support for Python 2.7
+- Updates Flask dependency
+
 Version 0.4.0 (released 2016-07-01)
 
 - Removes support for Python 2.6.
