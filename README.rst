@@ -32,13 +32,6 @@ can be build using Sphinx: ::
     pip install Sphinx
     python setup.py build_sphinx
 
-Example
-=======
-To view an example of breadcrumbs in action, see `examples/app.py`: ::
-
-    cd examples
-    FLASK_APP=app.py flask run
-
 Testing
 =======
 Running the test suite is as simple as: ::
