@@ -21,9 +21,14 @@ env:
   - REQUIREMENTS=devel
 
 python:
-  - "3.5"
   - "3.6"
   - "3.7"
+  - "3.8"
+
+matrix:
+  allow_failures:
+    - env: REQUIREMENTS=devel
+    - python: 3.8
 
 before_install:
   - "travis_retry pip install --upgrade pip setuptools py"
@@ -48,7 +53,6 @@ deploy:
   password:
     secure: Xt9EigqRTy4q7pw1iP58a9k+YTC8WSaeSUJhsfCLvjKYvi5/eAQ/CJneQGliQm4yRIv69WwPsh7IuktmmcQpIdhkDZHN8BTa09B+C5aqx7LhulQGNQoX4oZ7sK0YPg/IRT0bFGLMbP6Hkri5Hr7e7zVFJg2Rkx9zWEtSC5qWTvM=
   distributions: sdist bdist_wheel
+  skip_existing: true
   on:
     tags: true
-    python: '3.6'
-    condition: "$REQUIREMENTS = release"
