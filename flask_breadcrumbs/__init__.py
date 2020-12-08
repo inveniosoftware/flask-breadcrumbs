@@ -185,6 +185,7 @@ def _lookup_breadcrumb_root_path():
 # Proxies
 # pylint: disable-msg=C0103
 
+
 #: A proxy for the current function.
 current_function = LocalProxy(_lookup_current_function)
 
