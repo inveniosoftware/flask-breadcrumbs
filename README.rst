@@ -2,8 +2,8 @@
  Flask-Breadcrumbs
 ===================
 
-.. image:: https://travis-ci.org/inveniosoftware/flask-breadcrumbs.png?branch=master
-    :target: https://travis-ci.org/inveniosoftware/flask-breadcrumbs
+.. image:: https://github.com/inveniosoftware/flask-breadcrumbs/workflows/CI/badge.svg
+    :target: https://github.com/inveniosoftware/flask-breadcrumbs/actions
 .. image:: https://coveralls.io/repos/inveniosoftware/flask-breadcrumbs/badge.png?branch=master
     :target: https://coveralls.io/r/inveniosoftware/flask-breadcrumbs
 .. image:: https://pypip.in/v/Flask-Breadcrumbs/badge.png
