@@ -13,8 +13,10 @@ Depends on `flask_menu` extension.
 """
 
 from flask import Blueprint, current_app, request
+
 # pylint: disable=F0401,E0611
 from flask_menu import Menu, current_menu, register_menu
+
 # pylint: enable=F0401,E0611
 from werkzeug.local import LocalProxy
 
